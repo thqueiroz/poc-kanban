@@ -14,14 +14,12 @@ export function Column({ title, tasks, colIndex, colId }: ColumnProps) {
   const { dragItem } = useBoard();
 
   const handleOnDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    const { prevColIndex, taskIndex, colId } = JSON.parse(
+    const { prevColIndex, taskIndex, taskId, colId } = JSON.parse(
       e.dataTransfer.getData("text")
     );
 
-    // console.log(colIndex, prevColIndex);
-
     if (colIndex !== prevColIndex) {
-        dragItem(colIndex, prevColIndex, taskIndex)
+        dragItem(colIndex, prevColIndex, taskIndex, taskId, colId);
     }
   };
 

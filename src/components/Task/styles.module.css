@@ -2,9 +2,12 @@
     width: 280px;
     background: #FFF;
     box-shadow: 2px 2px 2px 1px #364e7e1a;
+    border-radius: 0.6rem;
 
     padding: 1.2rem 0.5rem;
     margin: 2rem 0;
+
+    transition: background 0.6s;
 
     cursor: pointer;
 }

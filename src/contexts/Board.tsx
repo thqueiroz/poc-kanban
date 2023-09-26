@@ -14,7 +14,13 @@ interface BoardProviderProps {
 interface BoardProviderData {
   columns: Column[];
   setColums(value: Column[]): void;
-  dragItem(colIndex: number, prevColIndex: number, taskIndex: number): void;
+  dragItem(
+    colIndex: number,
+    prevColIndex: number,
+    taskIndex: number,
+    taskId: number,
+    colId: number,
+  ): void;
 }
 
 export type Task = {
@@ -73,14 +79,22 @@ function BoardProvider({ children }: BoardProviderProps) {
     },
   ]);
 
-  const dragItem = (colIndex: number, prevColIndex: number, taskIndex: number) => {
-    const newCols = columns;
-    const prevCol = newCols.find((col, i) => i === prevColIndex);
+  const dragItem = (
+    colIndex: number,
+    prevColIndex: number,
+    taskIndex: number,
+    taskId: number,
+    colId: number
+  ) => {
+    const newCols = [...columns];
+    const prevCol = newCols.find((col, i) => col.id === colId);
     const task = prevCol?.tasks.splice(taskIndex, 1)[0];
-    if(task) {
-        newCols.find((col, i) => i === colIndex)?.tasks.push(task);
+
+    if (task) {
+      newCols.find((col, i) => i === colIndex)?.tasks.push(task);
     }
-    setColums(newCols)
+    setColums(newCols);
+    
   };
 
   return (
